@@ -61,10 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         gallery.appendChild(galleryItem);        
         });
 
-        // Add event listener to the Listed Only checkbox
-        const listedOnlyCheckbox = document.getElementById('listed-only-checkbox');
-        listedOnlyCheckbox.addEventListener('change', function() {
-            filterListedOnly(this.checked);
+        galleryItem.dataset.listed = image.listed.toString(); // Set 'true' or 'false' as a string
         });
 
         initializeLazyLoad(); // Initialize lazy loading
@@ -76,6 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize filter buttons
     initializeFilterButtons();
     simulateInitialFilterClick(); // Simulate click on 'Show All' button
+
+    // Event listener for the Listed Only checkbox
+    const listedOnlyCheckbox = document.getElementById('listed-only-checkbox');
+    listedOnlyCheckbox.addEventListener('change', function() {
+        filterListedOnly(this.checked);
 });
 
 function mergeData(apiData, imagesData) {
@@ -130,9 +132,14 @@ function initializeFilterButtons() {
 }
 
 function filterSelection(filter) {
+    const isListedOnly = document.getElementById('listed-only-checkbox').checked;
     const galleryItems = document.querySelectorAll('.gallery-item');
+
     galleryItems.forEach(item => {
-        if (filter === 'all' || item.dataset.eyeColor === filter) {
+        const matchesColor = (filter === 'all' || item.dataset.eyeColor === filter);
+        const isListed = item.dataset.listed === 'true';
+
+        if (matchesColor && (!isListedOnly || isListed)) {
             item.style.display = 'block';
         } else {
             item.style.display = 'none';
@@ -141,25 +148,11 @@ function filterSelection(filter) {
 }
 
 function filterListedOnly(isChecked) {
-    const currentFilter = getCurrentFilter(); // Get the current eye color filter
-    const galleryItems = document.querySelectorAll('.gallery-item');
-
-    galleryItems.forEach(item => {
-        const matchesColorFilter = (currentFilter === 'all' || item.dataset.eyeColor === currentFilter);
-        const isListed = item.dataset.listed === 'true'; // Ensure to compare with string 'true'
-
-        if (matchesColorFilter && (!isChecked || isListed)) {
-            item.style.display = 'block';
-        } else {
-            item.style.display = 'none';
-        }
-    });
+    const currentFilter = getCurrentFilter();
+    filterSelection(currentFilter);
 }
 
 function getCurrentFilter() {
     const activeButton = document.querySelector('.filter-btn.active');
-    if (activeButton) {
-        return activeButton.getAttribute('onclick').match(/'([^']+)'/)[1];
-    }
-    return 'all';
+    return activeButton ? activeButton.getAttribute('onclick').match(/'([^']+)'/)[1] : 'all';
 }
