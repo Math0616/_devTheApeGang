@@ -70,6 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize filter buttons
     initializeFilterButtons();
     simulateInitialFilterClick(); // Simulate click on 'Show All' button
+
+    let apeFloorPrice = Math.min(...mergedData.filter(item => item.listed).map(item => item.listedPrice));
+    apeFloorPrice = apeFloorPrice / 100000000; // Convert to decimal
+    document.getElementById('apeFloor').textContent = apeFloorPrice.toFixed(8); // Formatting to 8 decimals
 });
 
 function mergeData(apiData, imagesData) {
@@ -144,9 +148,7 @@ fetch('https://ordinalmaxibiz.vercel.app/api/ombcollection')
 	})
 	.then(data => {
 		console.log('Data received:', data);
-		document.getElementById('floorPrice').textContent = data.floorPrice;
-		document.getElementById('owners').textContent = data.owners;
-		document.getElementById('totalListed').textContent = data.totalListed;
+		document.getElementById('floorPrice').textContent = data.floorPrice.toFixed(8); // Formatting to 8 decimals
 	})
 	.catch(error => {
 		console.error('Error fetching data:', error);
