@@ -58,10 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         galleryItem.appendChild(link);
 
         // Append gallery item to gallery
-        gallery.appendChild(galleryItem);        
-        });
-
-        galleryItem.dataset.listed = image.listed.toString(); // Set 'true' or 'false' as a string
+        gallery.appendChild(galleryItem);
         });
 
         initializeLazyLoad(); // Initialize lazy loading
@@ -73,11 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize filter buttons
     initializeFilterButtons();
     simulateInitialFilterClick(); // Simulate click on 'Show All' button
-
-    // Event listener for the Listed Only checkbox
-    const listedOnlyCheckbox = document.getElementById('listed-only-checkbox');
-    listedOnlyCheckbox.addEventListener('change', function() {
-        filterListedOnly(this.checked);
 });
 
 function mergeData(apiData, imagesData) {
@@ -132,27 +124,12 @@ function initializeFilterButtons() {
 }
 
 function filterSelection(filter) {
-    const isListedOnly = document.getElementById('listed-only-checkbox').checked;
     const galleryItems = document.querySelectorAll('.gallery-item');
-
     galleryItems.forEach(item => {
-        const matchesColor = (filter === 'all' || item.dataset.eyeColor === filter);
-        const isListed = item.dataset.listed === 'true';
-
-        if (matchesColor && (!isListedOnly || isListed)) {
+        if (filter === 'all' || item.dataset.eyeColor === filter) {
             item.style.display = 'block';
         } else {
             item.style.display = 'none';
         }
     });
-}
-
-function filterListedOnly(isChecked) {
-    const currentFilter = getCurrentFilter();
-    filterSelection(currentFilter);
-}
-
-function getCurrentFilter() {
-    const activeButton = document.querySelector('.filter-btn.active');
-    return activeButton ? activeButton.getAttribute('onclick').match(/'([^']+)'/)[1] : 'all';
 }
