@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (image.listed) {
             const priceInfo = document.createElement('div');
             const formattedPrice = (image.listedPrice / 100000000).toFixed(8); // Convert to decimal
-            priceInfo.innerHTML = `<p>Listed Price: ₿${formattedPrice}</p>`;
+            priceInfo.innerHTML = `<p>₿${formattedPrice}</p>`;
             priceInfo.classList.add('listed-price'); // Add class for styling
             imageContainer.appendChild(priceInfo);
         }
