@@ -45,7 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Display listed price if available
         if (image.listed) {
-            const formattedPrice = (image.listedPrice / 100000000).toString(); // Convert to decimal
+            const rawPrice = image.listedPrice / 100000000; // Convert to decimal
+            const formattedPrice = rawPrice % 1 === 0 ? rawPrice.toFixed(2) : rawPrice.toString();
             const priceInfo = `<p class="listed-price">₿${formattedPrice}</p>`; // Add class for styling
             imageContainer.innerHTML += priceInfo; // Append the price info to the image container
         }
