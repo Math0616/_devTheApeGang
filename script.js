@@ -58,7 +58,13 @@ document.addEventListener('DOMContentLoaded', function() {
         galleryItem.appendChild(link);
 
         // Append gallery item to gallery
-        gallery.appendChild(galleryItem);
+        gallery.appendChild(galleryItem);        
+        });
+        
+        // Add event listener to the Listed Only checkbox
+        const listedOnlyCheckbox = document.getElementById('listed-only-checkbox');
+        listedOnlyCheckbox.addEventListener('change', function() {
+            filterListedOnly(this.checked);
         });
 
         initializeLazyLoad(); // Initialize lazy loading
@@ -130,6 +136,17 @@ function filterSelection(filter) {
             item.style.display = 'block';
         } else {
             item.style.display = 'none';
+        }
+    });
+}
+
+function filterListedOnly(isChecked) {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    galleryItems.forEach(item => {
+        if (isChecked && !item.dataset.listed) {
+            item.style.display = 'none'; // Hide unlisted items
+        } else {
+            item.style.display = 'block'; // Show all items
         }
     });
 }
