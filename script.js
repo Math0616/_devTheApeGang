@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         mergedData.forEach(image => {
             const galleryItem = document.createElement('div');
+            const imageUrl = `https://ord-mirror.magiceden.dev/content/${image.tokenId}`;
+
             galleryItem.classList.add('gallery-item');
             galleryItem.style.display = 'block';
 
@@ -26,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Create and set image element
             const img = document.createElement('img');
-            img.src = `https://ord-mirror.magiceden.dev/content/${image.tokenId}`;
+            img.src = imageUrl; // Use the correctly constructed URL
             img.alt = `Ordinal Maxi Biz #${image.tokenId}`;
             img.classList.add('lazyload');
 
@@ -37,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (image.listed) {
                 const priceInfo = document.createElement('div');
                 const formattedPrice = (image.listedPrice / 100000000).toFixed(8); // Convert to decimal
-                priceInfo.innerHTML = `<p>Listed Price: ₿${formattedPrice}</p>`;
+                priceInfo.innerHTML = `<p>₿${formattedPrice}</p>`;
                 priceInfo.style.position = 'absolute';
                 priceInfo.style.top = '0';
                 priceInfo.style.left = '0';
