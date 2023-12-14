@@ -8,55 +8,63 @@ document.addEventListener('DOMContentLoaded', function() {
         const gallery = document.querySelector('.gallery');
         
         mergedData.forEach(image => {
-            const galleryItem = document.createElement('div');
-            const imageUrl = `https://ord-mirror.magiceden.dev/content/${image.tokenId}`;
+        const imageUrl = `https://ord-mirror.magiceden.dev/content/${image.tokenId}`;
 
-            galleryItem.classList.add('gallery-item');
-            galleryItem.style.display = 'block';
+		// Create gallery item container
+		const galleryItem = document.createElement('div');
+		galleryItem.classList.add('gallery-item');
 
-            // Set eyeColor and other optional attributes as data attributes
-            galleryItem.dataset.eyeColor = image.eyeColor;
+		// Set eyeColor and other optional attributes as data attributes
+		const attributes = ['eyeColor'];
+		attributes.forEach(attr => {
+			if (image[attr]) {
+			galleryItem.dataset[attr] = image[attr];
+			}
+		});
 
-            // Create link element
-            const link = document.createElement('a');
-            link.href = `https://magiceden.io/ordinals/item-details/${image.tokenId}`;
-            link.target = "_blank";
+        // Set initial display to block
+        galleryItem.style.display = 'block';
 
-            // Create image container
-            const imageContainer = document.createElement('div');
-            imageContainer.classList.add('image-container');
+		// Create link element
+		const link = document.createElement('a');
+		link.href = `https://magiceden.io/ordinals/item-details/${image.tokenId}`;
+		link.target = "_blank";
 
-            // Create and set image element
-            const img = document.createElement('img');
-            img.src = imageUrl; // Use the correctly constructed URL
-            img.alt = `Ordinal Maxi Biz #${image.tokenId}`;
-            img.classList.add('lazyload');
+		// Create image container
+		const imageContainer = document.createElement('div');
+		imageContainer.classList.add('image-container');
 
-            // Append image to its container
-            imageContainer.appendChild(img);
+		// Create and set image element
+		const img = document.createElement('img');
+		img.dataset.src = imageUrl;
+		img.alt = `Ordinal Maxi Biz #${image.tokenId}`;
+		img.classList.add('lazyload');
 
-            // Display listed price if available
-            if (image.listed) {
-                const priceInfo = document.createElement('div');
-                const formattedPrice = (image.listedPrice / 100000000).toFixed(8); // Convert to decimal
-                priceInfo.innerHTML = `<p>₿${formattedPrice}</p>`;
-                priceInfo.style.position = 'absolute';
-                priceInfo.style.top = '0';
-                priceInfo.style.left = '0';
-                priceInfo.style.color = 'white';
-                priceInfo.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-                priceInfo.style.padding = '5px';
-                imageContainer.appendChild(priceInfo);
-            }
+		// Append image to its container
+		imageContainer.appendChild(img);
 
-            // Append image container to link
-            link.appendChild(imageContainer);
+        // Display listed price if available
+        if (image.listed) {
+            const priceInfo = document.createElement('div');
+            const formattedPrice = (image.listedPrice / 100000000).toFixed(8); // Convert to decimal
+            priceInfo.innerHTML = `<p>₿${formattedPrice}</p>`;
+            priceInfo.style.position = 'absolute';
+            priceInfo.style.top = '0';
+            priceInfo.style.left = '0';
+            priceInfo.style.color = 'white';
+            priceInfo.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+            priceInfo.style.padding = '5px';
+            imageContainer.appendChild(priceInfo);
+        }
 
-            // Append link to gallery item
-            galleryItem.appendChild(link);
+        // Append image container to link
+        link.appendChild(imageContainer);
 
-            // Append gallery item to gallery
-            gallery.appendChild(galleryItem);
+        // Append link to gallery item
+        galleryItem.appendChild(link);
+
+        // Append gallery item to gallery
+        gallery.appendChild(galleryItem);
         });
 
         initializeLazyLoad(); // Initialize lazy loading
