@@ -175,6 +175,19 @@
 			border-radius: 10px; /* Rounded corners for the image */
 		}
 
+		.history-image {
+			max-height: 50px; /* Half the original height */
+			width: auto; /* Scale width to maintain aspect ratio */
+			border-radius: 10px; /* Rounded corners for the image */
+		}
+
+		/* Ensure the anchor tag does not disrupt the layout */
+		.history-row a {
+			text-decoration: none; /* Removes underline from links */
+			color: inherit; /* Inherits the text color from the parent element */
+			display: inline-block; /* Allows width and height to be set */
+		}
+
 	</style>
 </head>
 <body>

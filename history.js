@@ -21,32 +21,37 @@ function displayHistoryData(historyData) {
         row.style.justifyContent = 'space-between';
         row.style.marginBottom = '10px';
 
-        // Create the anchor element for the image
+        // Create the anchor element for the image and set its properties
         const imageLink = document.createElement('a');
-        // Use the tokenId to create the URL
         imageLink.href = `https://magiceden.io/ordinals/item-details/${activity.tokenId}`;
-        imageLink.target = "_blank"; // Ensure the link opens in a new tab
+        imageLink.target = "_blank";
+
+        // Create the image and set its properties
+        const img = document.createElement('img');
+        img.src = activity.token.contentURI;
+        img.alt = activity.token.meta.name || `Inscription #${activity.token.inscriptionNumber}`;
+        img.classList.add('history-image'); // Add a class for styling if needed
+
+        // Append the image to the link
+        imageLink.appendChild(img);
 
         // Image container
         const imageContainer = document.createElement('div');
         imageContainer.classList.add('image-container');
-
-        const img = document.createElement('img');
-        img.src = activity.token.contentURI;
-        img.alt = activity.token.meta.name || `Inscription #${activity.token.inscriptionNumber}`;
-        imageContainer.appendChild(img);
-
-        // Append the image container to the link
-        imageLink.appendChild(imageContainer);
+        
+        // Append the link (which contains the image) to the image container
+        imageContainer.appendChild(imageLink);
 
         // Name container, use 'Inscription #' if the name is not available
         const nameContainer = document.createElement('div');
         nameContainer.textContent = activity.token.meta.name || `Inscription #${activity.token.inscriptionNumber}`;
 
         // Format the price from satoshis to bitcoins and remove trailing zeros
-        const priceInBTC = activity.listedPrice ? (parseInt(activity.listedPrice) / 100000000).toString() : 'N/A';
-        // Use regex to remove trailing zeros after decimal
-        const formattedPrice = priceInBTC !== 'N/A' ? parseFloat(priceInBTC).toFixed(8).replace(/(\.\d*?[1-9])0+$/, "$1").replace(/\.0+$/, "") : 'N/A';
+        let formattedPrice = 'N/A';
+        if (activity.listedPrice) {
+            const priceInBTC = parseInt(activity.listedPrice) / 100000000;
+            formattedPrice = parseFloat(priceInBTC.toFixed(8)).toString().replace(/\.?0+$/, "");
+        }
 
         // Price container
         const priceContainer = document.createElement('div');
@@ -56,8 +61,8 @@ function displayHistoryData(historyData) {
         const dateContainer = document.createElement('div');
         dateContainer.textContent = new Date(activity.createdAt).toLocaleString();
 
-        // Append the link (which contains the image) and other containers to the row
-        row.appendChild(imageLink); // Now appending the link instead of the imageContainer directly
+        // Append the image container and other containers to the row
+        row.appendChild(imageContainer);
         row.appendChild(nameContainer);
         row.appendChild(priceContainer);
         row.appendChild(dateContainer);
@@ -66,7 +71,6 @@ function displayHistoryData(historyData) {
         gallery.appendChild(row);
     });
 }
-
 
 // This function can be called when the history button is clicked
 document.getElementById('history-btn').addEventListener('click', loadHistoryData);
