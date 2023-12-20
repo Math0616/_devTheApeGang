@@ -6,9 +6,9 @@ function loadHistoryData() {
 }
 
 function displayHistoryData(historyData) {
-    const gallery = document.querySelector('.gallery');
-    gallery.style.display = 'flex'; // Use flexbox to manage the layout
-    gallery.style.flexDirection = 'column'; // Stack children elements in a column
+    const historyGallery = document.querySelector('.historyGallery');
+    historyGallery.style.display = 'flex'; // Use flexbox to manage the layout
+    historyGallery.style.flexDirection = 'column'; // Stack children elements in a column
 
     // Flatten the array of groups into a single array of activities
     const allActivities = historyData.flatMap(group => group.activities);
@@ -56,7 +56,7 @@ function displayHistoryData(historyData) {
         row.appendChild(priceContainer);
         row.appendChild(dateContainer);
 
-        // Append row to the gallery
-        gallery.appendChild(row);
+        // Append row to the historyGallery
+        historyGallery.appendChild(row);
     });
 }
