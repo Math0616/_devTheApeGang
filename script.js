@@ -169,9 +169,11 @@ function initializeFilterButtons() {
 }
 
 function filterSelection(filter) {
-    // Reset the gallery to its original state before applying the filter
+    const gallery = document.querySelector('.gallery'); // Define gallery here
+
+    // Check if the gallery is empty (relevant when switching back from history view)
     if (gallery.innerHTML === '') {
-        createGallery(mergedData); // Assuming mergedData is accessible here
+        createGallery(mergedData); // Ensure mergedData is available
     }
 
     const galleryItems = document.querySelectorAll('.gallery-item');
