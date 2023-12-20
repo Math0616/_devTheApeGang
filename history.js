@@ -12,6 +12,9 @@ function displayHistoryData(historyData) {
         return;
     }
     
+    // Clear any existing content in historyGallery
+    historyGallery.innerHTML = '';
+
     historyGallery.style.display = 'flex'; // Use flexbox to manage the layout
     historyGallery.style.flexDirection = 'column'; // Stack children elements in a column
 
