@@ -11,7 +11,10 @@ function displayHistoryData(historyData) {
     gallery.style.display = 'flex'; // Use flexbox to manage the layout
     gallery.style.flexDirection = 'column'; // Stack children elements in a column
 
+    // Flatten the array of groups into a single array of activities
     const allActivities = historyData.flatMap(group => group.activities);
+
+    // Sort the activities by the 'createdAt' date in descending order
     allActivities.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     allActivities.forEach(activity => {
@@ -21,47 +24,26 @@ function displayHistoryData(historyData) {
         row.style.justifyContent = 'space-between';
         row.style.marginBottom = '10px';
 
-        // Create the anchor element for the image and set its properties
-        const imageLink = document.createElement('a');
-        imageLink.href = `https://magiceden.io/ordinals/item-details/${activity.tokenId}`;
-        imageLink.target = "_blank";
-
-        // Create the image and set its properties
+        // Image container
+        const imageContainer = document.createElement('div');
         const img = document.createElement('img');
         img.src = activity.token.contentURI;
         img.alt = activity.token.meta.name || `Inscription #${activity.token.inscriptionNumber}`;
-        img.classList.add('history-image'); // Add a class for styling if needed
-
-        // Append the image to the link
-        imageLink.appendChild(img);
-
-        // Image container
-        const imageContainer = document.createElement('div');
-        imageContainer.classList.add('image-container');
-        
-        // Append the link (which contains the image) to the image container
-        imageContainer.appendChild(imageLink);
+        imageContainer.appendChild(img);
 
         // Name container, use 'Inscription #' if the name is not available
         const nameContainer = document.createElement('div');
         nameContainer.textContent = activity.token.meta.name || `Inscription #${activity.token.inscriptionNumber}`;
 
-        // Format the price from satoshis to bitcoins and remove trailing zeros
-        let formattedPrice = 'N/A';
-        if (activity.listedPrice) {
-            const priceInBTC = parseInt(activity.listedPrice) / 100000000;
-            formattedPrice = parseFloat(priceInBTC.toFixed(8)).toString().replace(/\.?0+$/, "");
-        }
-
         // Price container
         const priceContainer = document.createElement('div');
-        priceContainer.textContent = `${formattedPrice} BTC`;
+        priceContainer.textContent = activity.listedPrice ? `${activity.listedPrice} BTC` : 'N/A';
 
         // Date container
         const dateContainer = document.createElement('div');
         dateContainer.textContent = new Date(activity.createdAt).toLocaleString();
 
-        // Append the image container and other containers to the row
+        // Append all containers to the row
         row.appendChild(imageContainer);
         row.appendChild(nameContainer);
         row.appendChild(priceContainer);

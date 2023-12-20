@@ -146,6 +146,35 @@
 			z-index: 3; /* Ensure this is above other elements */
 			}
 
+		.history-row {
+			display: flex;
+			flex-direction: row; /* Align children in a row instead of a column */
+			align-items: center; /* Center items vertically */
+			justify-content: flex-start; /* Align items to the start of the row */
+			width: 100%;
+			margin-bottom: 20px; /* Space between rows */
+		}
+
+		.history-row > div {
+			margin: 0 10px; /* Margin for spacing */
+			flex: 1; /* Allow each child to grow */
+			text-align: left; /* Align text to the left */
+		}
+
+		.history-row .image-container {
+			flex: 0 0 auto; /* Do not grow or shrink, keep the original size */
+			margin-right: 20px; /* Space after the image */
+			border-radius: 10px; /* Rounded corners for the container */
+			overflow: hidden; /* Ensures the image corners are also rounded */
+		}
+
+		/* Adjust the image container size as needed */
+		.history-row .image-container img {
+			max-height: 50%; /* Half the original height */
+			width: auto; /* Scale width to maintain aspect ratio */
+			border-radius: 10px; /* Rounded corners for the image */
+		}
+
 	</style>
 </head>
 <body>
