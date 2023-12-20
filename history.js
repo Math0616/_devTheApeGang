@@ -17,7 +17,6 @@ function displayHistoryData(historyData) {
     // Sort the activities by the 'createdAt' date in descending order
     allActivities.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    // Now create the history items using the sorted activities
     allActivities.forEach(activity => {
         const row = document.createElement('div');
         row.classList.add('history-row');
@@ -29,12 +28,12 @@ function displayHistoryData(historyData) {
         const imageContainer = document.createElement('div');
         const img = document.createElement('img');
         img.src = activity.token.contentURI;
-        img.alt = activity.token.meta.name;
+        img.alt = activity.token.meta.name || `Inscription #${activity.token.inscriptionNumber}`;
         imageContainer.appendChild(img);
 
-        // Name container
+        // Name container, use 'Inscription #' if the name is not available
         const nameContainer = document.createElement('div');
-        nameContainer.textContent = activity.token.meta.name;
+        nameContainer.textContent = activity.token.meta.name || `Inscription #${activity.token.inscriptionNumber}`;
 
         // Price container
         const priceContainer = document.createElement('div');
