@@ -26,7 +26,7 @@ function displayHistoryData(historyData) {
 
         // Image container
         const imageContainer = document.createElement('div');
-        imageContainer.classList.add('image-container'); // Make sure this class is used in your CSS
+        imageContainer.classList.add('image-history-container'); // Make sure this class is used in your CSS
 
         const img = document.createElement('img');
         img.classList.add('history-image'); // Add this class to your CSS to style the images
