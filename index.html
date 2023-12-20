@@ -164,12 +164,15 @@
 		.history-row .image-container {
 			flex: 0 0 auto; /* Do not grow or shrink, keep the original size */
 			margin-right: 20px; /* Space after the image */
+			border-radius: 10px; /* Rounded corners for the container */
+			overflow: hidden; /* Ensures the image corners are also rounded */
 		}
 
 		/* Adjust the image container size as needed */
 		.history-row .image-container img {
-			max-height: 100px; /* Example fixed height, adjust as needed */
+			max-height: 50px; /* Half the original height */
 			width: auto; /* Scale width to maintain aspect ratio */
+			border-radius: 10px; /* Rounded corners for the image */
 		}
 
 	</style>
