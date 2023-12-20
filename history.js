@@ -7,6 +7,11 @@ function loadHistoryData() {
 
 function displayHistoryData(historyData) {
     const historyGallery = document.querySelector('.historyGallery');
+    if (!historyGallery) {
+        console.error('History gallery element not found');
+        return;
+    }
+    
     historyGallery.style.display = 'flex'; // Use flexbox to manage the layout
     historyGallery.style.flexDirection = 'column'; // Stack children elements in a column
 
