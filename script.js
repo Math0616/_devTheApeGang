@@ -157,12 +157,12 @@ function filterSelection(filter) {
     const galleryItems = document.querySelectorAll('.gallery-item');
     const historyGallery = document.querySelector('.historyGallery');
 
-    // Hide the history gallery when a filter is applied
-    if (gallery-item) {
+    // Hide the history gallery only when a filter other than 'none' is applied
+    if (historyGallery && filter !== 'none') {
         historyGallery.style.display = 'none';
     }
 
-    // Rest of your filter logic...
+    // Show gallery items based on the filter, hide them if filter is 'none'
     galleryItems.forEach(item => {
         if (filter === 'all' || item.dataset.eyeColor === filter) {
             item.style.display = 'block';
@@ -170,4 +170,9 @@ function filterSelection(filter) {
             item.style.display = 'none';
         }
     });
+
+    // If the filter is 'none', load and show history data
+    if (filter === 'none') {
+        loadHistoryData();
+    }
 }
