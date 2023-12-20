@@ -148,18 +148,30 @@
 
 		.history-row {
 			display: flex;
-			flex-direction: column;
-			align-items: center; /* Center items horizontally */
-			justify-content: center; /* Center items vertically */
+			flex-direction: row; /* Align children in a row instead of a column */
+			align-items: center; /* Center items vertically */
+			justify-content: flex-start; /* Align items to the start of the row */
 			width: 100%;
 			margin-bottom: 20px; /* Space between rows */
-			}
+		}
 
 		.history-row > div {
-			width: 100%; /* Make each child take full width */
-			text-align: center; /* Center the text */
-			margin: 5px 0; /* Margin for spacing */
-			}
+			margin: 0 10px; /* Margin for spacing */
+			flex: 1; /* Allow each child to grow */
+			text-align: left; /* Align text to the left */
+		}
+
+		.image-container {
+			flex: 0 0 auto; /* Do not grow or shrink, keep the original size */
+			margin-right: 20px; /* Space after the image */
+		}
+
+		/* Adjust the image container size as needed */
+		.image-container img {
+			max-height: 100px; /* Example fixed height, adjust as needed */
+			width: auto; /* Scale width to maintain aspect ratio */
+		}
+
 	</style>
 </head>
 <body>
