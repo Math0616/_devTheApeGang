@@ -158,8 +158,18 @@ function initializeFilterButtons() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const filter = this.getAttribute('onclick').match(/'([^']+)'/)[1];
-            filterSelection(filter);
+            let filter;
+            if (this.id === 'history-btn') {
+                filter = 'history';
+                loadHistoryData(); // Call loadHistoryData function when history button is clicked
+            } else {
+                // Extract the filter criteria from the button's text or any other attribute
+                filter = this.textContent.toLowerCase().match(/\((.*?)\)/)[1]; // Example to extract filter from text
+            }
+
+            if (filter !== 'history') {
+                filterSelection(filter);
+            }
 
             // Update active button style
             filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -167,6 +177,7 @@ function initializeFilterButtons() {
         });
     });
 }
+
 
 function filterSelection(filter) {
     const gallery = document.querySelector('.gallery'); // Define gallery here
