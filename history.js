@@ -43,9 +43,14 @@ function displayHistoryData(historyData) {
         const nameContainer = document.createElement('div');
         nameContainer.textContent = activity.token.meta.name || `Inscription #${activity.token.inscriptionNumber}`;
 
+        // Format the price from satoshis to bitcoins and remove trailing zeros
+        const priceInBTC = activity.listedPrice ? (parseInt(activity.listedPrice) / 100000000).toString() : 'N/A';
+        // Use regex to remove trailing zeros after decimal
+        const formattedPrice = priceInBTC !== 'N/A' ? parseFloat(priceInBTC).toFixed(8).replace(/(\.\d*?[1-9])0+$/, "$1").replace(/\.0+$/, "") : 'N/A';
+
         // Price container
         const priceContainer = document.createElement('div');
-        priceContainer.textContent = activity.listedPrice ? `${activity.listedPrice} BTC` : 'N/A';
+        priceContainer.textContent = `${formattedPrice} BTC`;
 
         // Date container
         const dateContainer = document.createElement('div');
