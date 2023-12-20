@@ -158,18 +158,10 @@ function initializeFilterButtons() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
-            let filter;
-            if (this.id === 'history-btn') {
-                filter = 'history';
-                loadHistoryData(); // Call loadHistoryData function when history button is clicked
-            } else {
-                // Extract the filter criteria from the button's text or any other attribute
-                filter = this.textContent.toLowerCase().match(/\((.*?)\)/)[1]; // Example to extract filter from text
-            }
+            const filter = this.textContent.trim().toLowerCase(); // Extract the filter from the button's text
 
-            if (filter !== 'history') {
-                filterSelection(filter);
-            }
+            // Call filterSelection with the extracted filter
+            filterSelection(filter);
 
             // Update active button style
             filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -178,21 +170,14 @@ function initializeFilterButtons() {
     });
 }
 
-
 function filterSelection(filter) {
-    const gallery = document.querySelector('.gallery'); // Define gallery here
-
-    // Check if the gallery is empty (relevant when switching back from history view)
-    if (gallery.innerHTML === '') {
-        createGallery(mergedData); // Ensure mergedData is available
-    }
-
     const galleryItems = document.querySelectorAll('.gallery-item');
     galleryItems.forEach(item => {
-        if (filter === 'all' || item.dataset.eyeColor === filter) {
+        if (filter === 'all' || (filter !== 'history' && item.dataset.eyeColor === filter)) {
             item.style.display = 'block';
         } else {
             item.style.display = 'none';
         }
     });
 }
+
