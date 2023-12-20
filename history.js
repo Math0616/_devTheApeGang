@@ -7,6 +7,8 @@ function loadHistoryData() {
 
 function displayHistoryData(historyData) {
     const historyGallery = document.querySelector('.historyGallery');
+    historyGallery.style.display = 'flex'; // Use flexbox to manage the layout
+    historyGallery.style.flexDirection = 'column'; // Stack children elements in a column
 
     // Flatten the array of groups into a single array of activities
     const allActivities = historyData.flatMap(group => group.activities);
