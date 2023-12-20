@@ -148,33 +148,35 @@
 
 		.history-row {
 			display: flex;
-			flex-direction: row; /* Align children in a row instead of a column */
-			align-items: center; /* Center items vertically */
-			justify-content: flex-start; /* Align items to the start of the row */
+			flex-direction: row;
+			align-items: center;
+			justify-content: flex-start;
 			width: 100%;
 			margin-bottom: 20px; /* Space between rows */
-		}
-
-		.history-row > div {
-			margin: 0 10px; /* Margin for spacing */
-			flex: 1; /* Allow each child to grow */
-			max-height: 30px;
-			text-align: left; /* Align text to the left */
+			overflow: hidden; /* Hide overflow */
 		}
 
 		.history-row .image-container {
-			max-width: 100%; /* Ensures the image is responsive and does not exceed the container */
-			max-height: 100%; /* Ensures the image height does not exceed the container */
-			margin-right: 20px; /* Space after the image */
-			border-radius: 10px; /* Rounded corners for the container */
-			overflow: hidden; /* Ensures the image corners are also rounded */
+			margin-right: 20px;
+			border-radius: 10px;
+			overflow: hidden;
+			/* Set a fixed height for the image container */
+			height: 60px; /* Adjust this as needed */
 		}
 
-		/* Adjust the image container size as needed */
 		.history-row .image-container img {
-			max-height: 50%; /* Half the original height */
-			width: auto; /* Scale width to maintain aspect ratio */
-			border-radius: 10px; /* Rounded corners for the image */
+			max-height: 100%; /* Image will fill the container height */
+			max-width: 100%; /* Image will fill the container width, maintaining aspect ratio */
+			border-radius: 10px;
+			object-fit: cover; /* Ensures the image covers the area, may crop if aspect ratio differs */
+		}
+
+		.history-row > div {
+			margin: 0 10px;
+			flex: 1;
+			text-align: left;
+			display: flex; /* Add flex to align text vertically */
+			align-items: center; /* Center text vertically */
 		}
 
 	</style>
