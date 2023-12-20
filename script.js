@@ -128,7 +128,7 @@ function createGallery(mergedData) {
     const filterButton = document.getElementById('filter-btn');
     if (filterButton) {
         filterButton.addEventListener('click', function() {
-            initializeFilterButtons();
+            createGallery(mergedData);
         });
     }
 
