@@ -11,10 +11,7 @@ function displayHistoryData(historyData) {
     gallery.style.display = 'flex'; // Use flexbox to manage the layout
     gallery.style.flexDirection = 'column'; // Stack children elements in a column
 
-    // Flatten the array of groups into a single array of activities
     const allActivities = historyData.flatMap(group => group.activities);
-
-    // Sort the activities by the 'createdAt' date in descending order
     allActivities.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     allActivities.forEach(activity => {
@@ -24,12 +21,23 @@ function displayHistoryData(historyData) {
         row.style.justifyContent = 'space-between';
         row.style.marginBottom = '10px';
 
+        // Create the anchor element for the image
+        const imageLink = document.createElement('a');
+        // Use the tokenId to create the URL
+        imageLink.href = `https://magiceden.io/ordinals/item-details/${activity.tokenId}`;
+        imageLink.target = "_blank"; // Ensure the link opens in a new tab
+
         // Image container
         const imageContainer = document.createElement('div');
+        imageContainer.classList.add('image-container');
+
         const img = document.createElement('img');
         img.src = activity.token.contentURI;
         img.alt = activity.token.meta.name || `Inscription #${activity.token.inscriptionNumber}`;
         imageContainer.appendChild(img);
+
+        // Append the image container to the link
+        imageLink.appendChild(imageContainer);
 
         // Name container, use 'Inscription #' if the name is not available
         const nameContainer = document.createElement('div');
@@ -43,8 +51,8 @@ function displayHistoryData(historyData) {
         const dateContainer = document.createElement('div');
         dateContainer.textContent = new Date(activity.createdAt).toLocaleString();
 
-        // Append all containers to the row
-        row.appendChild(imageContainer);
+        // Append the link (which contains the image) and other containers to the row
+        row.appendChild(imageLink); // Now appending the link instead of the imageContainer directly
         row.appendChild(nameContainer);
         row.appendChild(priceContainer);
         row.appendChild(dateContainer);
@@ -53,6 +61,7 @@ function displayHistoryData(historyData) {
         gallery.appendChild(row);
     });
 }
+
 
 // This function can be called when the history button is clicked
 document.getElementById('history-btn').addEventListener('click', loadHistoryData);
