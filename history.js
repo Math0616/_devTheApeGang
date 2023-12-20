@@ -19,9 +19,9 @@ function displayHistoryData(historyData) {
     allActivities.forEach(activity => {
         const row = document.createElement('div');
         row.classList.add('history-row');
-        row.style.display = 'flex';
-        row.style.justifyContent = 'space-between';
-        row.style.marginBottom = '10px';
+        //row.style.display = 'flex';
+        //row.style.justifyContent = 'space-between';
+        //row.style.marginBottom = '10px';
 
         // Image container
         const imageContainer = document.createElement('div');
