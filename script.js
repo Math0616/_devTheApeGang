@@ -133,23 +133,3 @@ function filterSelection(filter) {
         }
     });
 }
-
-fetch('https://ordinalmaxibiz.vercel.app/api/ombcollection')
-	.then(response => {
-		console.log('Response received:', response);
-		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
-		}
-		return response.json();
-	})
-	.then(data => {
-		console.log('Data received:', data);
-		document.getElementById('floorPrice').textContent = data.floorPrice.toFixed(8); // Formatting to 8 decimals
-	})
-	.catch(error => {
-		console.error('Error fetching data:', error);
-	});
-
-let apeFloorPrice = Math.min(...mergedData.filter(item => item.listed).map(item => item.listedPrice));
-apeFloorPrice = apeFloorPrice / 100000000; // Convert to decimal
-document.getElementById('apeFloor').textContent = apeFloorPrice.toFixed(8); // Formatting to 8 decimals
