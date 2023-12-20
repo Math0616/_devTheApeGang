@@ -8,42 +8,41 @@ function loadHistoryData() {
 function displayHistoryData(historyData) {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = ''; // Clear existing content
-    gallery.style.display = 'grid';
-    gallery.style.gridTemplateColumns = '1fr 1fr 1fr 1fr'; // Four equal columns
+    gallery.style.display = 'flex'; // Use flexbox to manage the layout
+    gallery.style.flexDirection = 'column'; // Stack children elements in a column
 
     historyData.forEach(group => {
         group.activities.forEach(activity => {
-            // Create a new row for each activity
             const row = document.createElement('div');
-            row.classList.add('gallery-item');
-            row.classList.add('show'); // Ensure it is visible
-            row.style.display = 'grid';
-            row.style.gridTemplateColumns = '1fr 1fr 1fr 1fr';
-            row.style.gap = '10px';
+            row.classList.add('history-row'); // Use this class to style the row
+            row.style.display = 'flex';
+            row.style.justifyContent = 'space-between';
             row.style.marginBottom = '10px';
 
-            // Image column
+            // Image container
             const imageContainer = document.createElement('div');
             const img = document.createElement('img');
             img.src = activity.token.contentURI;
             img.alt = activity.token.meta.name;
             imageContainer.appendChild(img);
+
+            // Name container
+            const nameContainer = document.createElement('div');
+            nameContainer.textContent = activity.token.meta.name;
+
+            // Price container
+            const priceContainer = document.createElement('div');
+            priceContainer.textContent = activity.listedPrice ? `${activity.listedPrice} BTC` : 'N/A';
+
+            // Date container
+            const dateContainer = document.createElement('div');
+            dateContainer.textContent = new Date(activity.createdAt).toLocaleString();
+
+            // Append all containers to the row
             row.appendChild(imageContainer);
-
-            // Name column
-            const nameDiv = document.createElement('div');
-            nameDiv.textContent = activity.token.meta.name;
-            row.appendChild(nameDiv);
-
-            // Listed Price column
-            const priceDiv = document.createElement('div');
-            priceDiv.textContent = activity.listedPrice ? `${activity.listedPrice} BTC` : 'N/A';
-            row.appendChild(priceDiv);
-
-            // Created At column
-            const dateDiv = document.createElement('div');
-            dateDiv.textContent = new Date(activity.createdAt).toLocaleString();
-            row.appendChild(dateDiv);
+            row.appendChild(nameContainer);
+            row.appendChild(priceContainer);
+            row.appendChild(dateContainer);
 
             // Append row to the gallery
             gallery.appendChild(row);
