@@ -158,24 +158,23 @@ function initializeFilterButtons() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
-            let filter = this.textContent.trim().toLowerCase();
+            const filter = this.getAttribute('onclick').match(/'([^']+)'/)[1];
             filterSelection(filter);
 
+            // Update active button style
             filterButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
         });
     });
 }
 
-
 function filterSelection(filter) {
     const galleryItems = document.querySelectorAll('.gallery-item');
     galleryItems.forEach(item => {
-        if (filter === 'all' || (filter !== 'history' && item.dataset.eyeColor === filter)) {
+        if (filter === 'all' || item.dataset.eyeColor === filter) {
             item.style.display = 'block';
         } else {
             item.style.display = 'none';
         }
     });
 }
-

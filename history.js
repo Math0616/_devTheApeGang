@@ -52,4 +52,3 @@ function displayHistoryData(historyData) {
 
 // This function can be called when the history button is clicked
 document.getElementById('history-btn').addEventListener('click', loadHistoryData);
-
