@@ -180,6 +180,12 @@
 			justify-content: flex-end; /* Aligns the child items to the right */
 		}
 
+		#buttons-container {
+			display: flex;
+			justify-content: space-between; /* This will push #filter-buttons to the left and #history-button-container to the right */
+			align-items: center; /* This will vertically align them if they have different heights */
+		}
+
 		#filter-container {
 			display: flex;
 			justify-content: start; /* Align to the left */
@@ -205,14 +211,16 @@
 </div>
 
 <!-- Filter buttons -->
-<div id="filter-container">
-	<button class="filter-btn active" onclick="filterSelection('all')">Show All</button>
-	<button class="filter-btn" onclick="filterSelection('red')">Red Eyes (3)</button>
-	<button class="filter-btn" onclick="filterSelection('blue')">Blue Eyes (2)</button>
-	<button class="filter-btn" onclick="filterSelection('green')">Green Eyes (18)</button>
-</div>
-<div id="history-button-container">
-	<button class="filter-btn" onclick="filterSelection('none')">History</button>
+<div id="buttons-container">
+    <div id="filter-container">
+        <button class="filter-btn active" onclick="filterSelection('all')">Show All</button>
+        <button class="filter-btn" onclick="filterSelection('red')">Red Eyes (3)</button>
+        <button class="filter-btn" onclick="filterSelection('blue')">Blue Eyes (2)</button>
+        <button class="filter-btn" onclick="filterSelection('green')">Green Eyes (18)</button>
+    </div>
+    <div id="history-button-container">
+        <button class="filter-btn" onclick="filterSelection('none')">History</button>
+    </div>
 </div>
 
 <div class="gallery">
