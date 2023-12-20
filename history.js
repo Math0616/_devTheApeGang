@@ -11,11 +11,8 @@ function displayHistoryData(historyData) {
         console.error('History gallery element not found');
         return;
     }
-    
-    // Clear any existing content in historyGallery
-    historyGallery.innerHTML = '';
 
-    historyGallery.style.display = 'flex'; // Use flexbox to manage the layout
+    historyGallery.style.display = 'none'; // Use flexbox to manage the layout
     historyGallery.style.flexDirection = 'column'; // Stack children elements in a column
 
     // Flatten the array of groups into a single array of activities
