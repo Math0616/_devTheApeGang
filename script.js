@@ -100,7 +100,7 @@ function createGallery(mergedData) {
 	initializeLazyLoad(); // After adding all images to the gallery, initialize lazy loading
     initializeFilterButtons();// Initialize filter buttons
     simulateInitialFilterClick(); // Simulate click on 'Show All' button
-
+	loadHistoryData(); // Load History Data
 }
 
 function extractSecondNumber(numberData) {
@@ -173,6 +173,6 @@ function filterSelection(filter) {
 
     // If the filter is 'none', load and show history data
     if (filter === 'none') {
-        loadHistoryData();
+        displayHistoryData();
     }
 }
