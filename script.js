@@ -155,14 +155,15 @@ function initializeFilterButtons() {
 
 function filterSelection(filter) {
     const galleryItems = document.querySelectorAll('.gallery-item');
-    galleryItems.forEach(item => {
-        if (filter === 'all' || item.dataset.eyeColor === filter) {
-            item.style.display = 'block';
-        } else if (filter === 'none') {
-            item.style.display = 'none';
-			loadHistoryData();
-        } else {
-            item.style.display = 'none';
-        }
-    });
+
+    if (filter === 'none') {
+        // Hide all items and run loadHistoryData
+        galleryItems.forEach(item => item.style.display = 'none');
+        loadHistoryData();
+    } else {
+        // Iterate over items and show/hide based on the filter
+        galleryItems.forEach(item => {
+            item.style.display = (filter === 'all' || item.dataset.eyeColor === filter) ? 'block' : 'none';
+        });
+    }
 }
