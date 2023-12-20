@@ -11,42 +11,47 @@ function displayHistoryData(historyData) {
     gallery.style.display = 'flex'; // Use flexbox to manage the layout
     gallery.style.flexDirection = 'column'; // Stack children elements in a column
 
-    historyData.forEach(group => {
-        group.activities.forEach(activity => {
-            const row = document.createElement('div');
-            row.classList.add('history-row'); // Use this class to style the row
-            row.style.display = 'flex';
-            row.style.justifyContent = 'space-between';
-            row.style.marginBottom = '10px';
+    // Flatten the array of groups into a single array of activities
+    const allActivities = historyData.flatMap(group => group.activities);
 
-            // Image container
-            const imageContainer = document.createElement('div');
-            const img = document.createElement('img');
-            img.src = activity.token.contentURI;
-            img.alt = activity.token.meta.name;
-            imageContainer.appendChild(img);
+    // Sort the activities by the 'createdAt' date in descending order
+    allActivities.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-            // Name container
-            const nameContainer = document.createElement('div');
-            nameContainer.textContent = activity.token.meta.name;
+    // Now create the history items using the sorted activities
+    allActivities.forEach(activity => {
+        const row = document.createElement('div');
+        row.classList.add('history-row');
+        row.style.display = 'flex';
+        row.style.justifyContent = 'space-between';
+        row.style.marginBottom = '10px';
 
-            // Price container
-            const priceContainer = document.createElement('div');
-            priceContainer.textContent = activity.listedPrice ? `${activity.listedPrice} BTC` : 'N/A';
+        // Image container
+        const imageContainer = document.createElement('div');
+        const img = document.createElement('img');
+        img.src = activity.token.contentURI;
+        img.alt = activity.token.meta.name;
+        imageContainer.appendChild(img);
 
-            // Date container
-            const dateContainer = document.createElement('div');
-            dateContainer.textContent = new Date(activity.createdAt).toLocaleString();
+        // Name container
+        const nameContainer = document.createElement('div');
+        nameContainer.textContent = activity.token.meta.name;
 
-            // Append all containers to the row
-            row.appendChild(imageContainer);
-            row.appendChild(nameContainer);
-            row.appendChild(priceContainer);
-            row.appendChild(dateContainer);
+        // Price container
+        const priceContainer = document.createElement('div');
+        priceContainer.textContent = activity.listedPrice ? `${activity.listedPrice} BTC` : 'N/A';
 
-            // Append row to the gallery
-            gallery.appendChild(row);
-        });
+        // Date container
+        const dateContainer = document.createElement('div');
+        dateContainer.textContent = new Date(activity.createdAt).toLocaleString();
+
+        // Append all containers to the row
+        row.appendChild(imageContainer);
+        row.appendChild(nameContainer);
+        row.appendChild(priceContainer);
+        row.appendChild(dateContainer);
+
+        // Append row to the gallery
+        gallery.appendChild(row);
     });
 }
 
