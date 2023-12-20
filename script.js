@@ -169,6 +169,11 @@ function initializeFilterButtons() {
 }
 
 function filterSelection(filter) {
+    // Reset the gallery to its original state before applying the filter
+    if (gallery.innerHTML === '') {
+        createGallery(mergedData); // Assuming mergedData is accessible here
+    }
+
     const galleryItems = document.querySelectorAll('.gallery-item');
     galleryItems.forEach(item => {
         if (filter === 'all' || item.dataset.eyeColor === filter) {
