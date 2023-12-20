@@ -9,15 +9,16 @@ function displayHistoryData(historyData) {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = ''; // Clear existing content
     gallery.style.display = 'grid';
-    gallery.style.gridTemplateColumns = '1fr 2fr 1fr 1fr'; // Set grid columns
+    gallery.style.gridTemplateColumns = '1fr 1fr 1fr 1fr'; // Four equal columns
 
-    historyData.forEach(item => {
-        item.activities.forEach(activity => {
+    historyData.forEach(group => {
+        group.activities.forEach(activity => {
+            // Create a new row for each activity
             const row = document.createElement('div');
             row.classList.add('gallery-item');
             row.classList.add('show'); // Ensure it is visible
             row.style.display = 'grid';
-            row.style.gridTemplateColumns = '1fr 2fr 1fr 1fr';
+            row.style.gridTemplateColumns = '1fr 1fr 1fr 1fr';
             row.style.gap = '10px';
             row.style.marginBottom = '10px';
 
