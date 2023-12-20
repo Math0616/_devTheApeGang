@@ -36,18 +36,25 @@
 			gap: 10px;
 			padding: 10px;
 			}
-			
-			/* Media query for mobile screens - adjust "max-width" as needed */
-			@media screen and (max-width: 700px) {
-			.gallery {
-				grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
-				}
 
-			.filter-btn {
-				font-size: 0.8em;
-				}
-
+		.historyGallery {
+			display: grid;
+			grid-template-columns: repeat(6, 1fr); /* 6 columns for desktop */
+			gap: 10px;
+			padding: 10px;
 			}
+			
+		/* Media query for mobile screens - adjust "max-width" as needed */
+		@media screen and (max-width: 700px) {
+		.gallery {
+			grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
+			}
+
+		.filter-btn {
+			font-size: 0.8em;
+			}
+
+		}
 
 		.gallery-item {
 			display: none; /* Set default display to none */
