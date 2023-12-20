@@ -7,8 +7,6 @@ function loadHistoryData() {
 
 function displayHistoryData(historyData) {
     const historyGallery = document.querySelector('.historyGallery');
-    //historyGallery.style.display = 'flex'; // Use flexbox to manage the layout
-    //historyGallery.style.flexDirection = 'column'; // Stack children elements in a column
 
     // Flatten the array of groups into a single array of activities
     const allActivities = historyData.flatMap(group => group.activities);
@@ -19,9 +17,9 @@ function displayHistoryData(historyData) {
     allActivities.forEach(activity => {
         const row = document.createElement('div');
         row.classList.add('history-row');
-        //row.style.display = 'flex';
-        //row.style.justifyContent = 'space-between';
-        //row.style.marginBottom = '10px';
+        row.style.display = 'flex';
+        row.style.justifyContent = 'space-between';
+        row.style.marginBottom = '10px';
 
         // Image container
         const imageContainer = document.createElement('div');
