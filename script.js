@@ -155,15 +155,19 @@ function initializeFilterButtons() {
 
 function filterSelection(filter) {
     const galleryItems = document.querySelectorAll('.gallery-item');
+    const historyGallery = document.querySelector('.historyGallery');
 
-    if (filter === 'none') {
-        // Hide all items and run loadHistoryData
-        galleryItems.forEach(item => item.style.display = 'none');
-        loadHistoryData();
-    } else {
-        // Iterate over items and show/hide based on the filter
-        galleryItems.forEach(item => {
-            item.style.display = (filter === 'all' || item.dataset.eyeColor === filter) ? 'block' : 'none';
-        });
+    // Hide the history gallery when a filter is applied
+    if (historyGallery) {
+        historyGallery.style.display = 'none';
     }
+
+    // Rest of your filter logic...
+    galleryItems.forEach(item => {
+        if (filter === 'all' || item.dataset.eyeColor === filter) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
 }
