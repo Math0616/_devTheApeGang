@@ -158,15 +158,9 @@ function initializeFilterButtons() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
-            if (this.id === 'history-btn') {
-                // Special handling for the history button
-                loadHistoryData();
-            } else {
-                const filter = this.textContent.trim().toLowerCase(); // Extract the filter from the button's text
-                filterSelection(filter);
-            }
+            let filter = this.textContent.trim().toLowerCase();
+            filterSelection(filter);
 
-            // Update active button style
             filterButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
         });
