@@ -158,6 +158,8 @@ function filterSelection(filter) {
     galleryItems.forEach(item => {
         if (filter === 'all' || item.dataset.eyeColor === filter) {
             item.style.display = 'block';
+        } else if (filter === 'none') {
+            item.style.display = 'none';
         } else {
             item.style.display = 'none';
         }
