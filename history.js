@@ -45,7 +45,7 @@ function displayHistoryData(historyData) {
 
         // Price container
         const priceContainer = document.createElement('div');
-        priceContainer.textContent = `${formattedPrice} BTC`;
+        priceContainer.textContent = `Sold for ${formattedPrice} BTC`;
 
         // Date container
         const dateContainer = document.createElement('div');
