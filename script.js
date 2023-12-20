@@ -116,6 +116,22 @@ function createGallery(mergedData) {
     initializeFilterButtons();// Initialize filter buttons
     simulateInitialFilterClick(); // Simulate click on 'Show All' button
 
+	// Add event listener for the new button
+    const historyButton = document.getElementById('history-btn');
+    if (historyButton) {
+        historyButton.addEventListener('click', function() {
+            loadHistoryData();
+        });
+    }
+
+	// Add event listener for the new button
+    const filterButton = document.getElementById('filter-btn');
+    if (filterButton) {
+        filterButton.addEventListener('click', function() {
+            initializeFilterButtons();
+        });
+    }
+
 }
 
 function extractSecondNumber(numberData) {
