@@ -7,7 +7,6 @@ function loadHistoryData() {
 
 function displayHistoryData(historyData) {
     const gallery = document.querySelector('.gallery');
-    gallery.innerHTML = ''; // Clear existing content
     gallery.style.display = 'flex'; // Use flexbox to manage the layout
     gallery.style.flexDirection = 'column'; // Stack children elements in a column
 

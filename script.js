@@ -160,6 +160,7 @@ function filterSelection(filter) {
             item.style.display = 'block';
         } else if (filter === 'none') {
             item.style.display = 'none';
+			loadHistoryData();
         } else {
             item.style.display = 'none';
         }
