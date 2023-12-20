@@ -61,6 +61,3 @@ function displayHistoryData(historyData) {
         gallery.appendChild(row);
     });
 }
-
-// This function can be called when the history button is clicked
-document.getElementById('history-btn').addEventListener('click', loadHistoryData);
