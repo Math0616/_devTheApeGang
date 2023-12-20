@@ -75,21 +75,6 @@ function createGallery(mergedData) {
 	img.alt = `Ordinal Maxi Biz #${image.id}`;
 	img.classList.add('lazyload');
 
-	let hoverTimeout; // Variable to store the hover state timeout
-
-	// Add mouseover event listener with a delay for the tooltip
-	img.addEventListener('mouseover', function(event) {
-		hoverTimeout = setTimeout(function() {
-			showTooltip(event, image);
-		}, 1000); // Delay of 1 second
-	});
-
-	// Add mouseout event listener to hide tooltip and clear the hover timeout
-	img.addEventListener('mouseout', function() {
-		clearTimeout(hoverTimeout);
-		hideTooltip();
-	});
-
 	// Append image to its container
 	imageContainer.appendChild(img);
 
