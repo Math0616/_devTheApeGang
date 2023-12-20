@@ -158,7 +158,7 @@ function filterSelection(filter) {
     const historyGallery = document.querySelector('.historyGallery');
 
     // Hide the history gallery when a filter is applied
-    if (historyGallery) {
+    if (gallery-item) {
         historyGallery.style.display = 'none';
     }
 
