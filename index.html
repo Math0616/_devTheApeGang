@@ -151,7 +151,7 @@
 			flex-direction: row; /* Align children in a row instead of a column */
 			align-items: center; /* Center items vertically */
 			justify-content: flex-start; /* Align items to the start of the row */
-			width: 100%;
+			width: 80%;
 			margin-bottom: 20px; /* Space between rows */
 		}
 
@@ -162,7 +162,8 @@
 		}
 
 		.history-row .image-container {
-			flex: 0 0 auto; /* Do not grow or shrink, keep the original size */
+			max-width: 80%; /* Ensures the image is responsive and does not exceed the container */
+			max-height: 80%; /* Ensures the image height does not exceed the container */
 			margin-right: 20px; /* Space after the image */
 			border-radius: 10px; /* Rounded corners for the container */
 			overflow: hidden; /* Ensures the image corners are also rounded */
