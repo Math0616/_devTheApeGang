@@ -1,5 +1,3 @@
-let mergedData = [];
-
 document.addEventListener('DOMContentLoaded', function() {
     Promise.all([
         fetch('images.json').then(response => response.json()),
@@ -158,41 +156,19 @@ function simulateInitialFilterClick() {
 
 function initializeFilterButtons() {
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const historyButton = document.getElementById('history-btn'); // Get the history button
-
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
+            const filter = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+            filterSelection(filter);
+
             // Update active button style
             filterButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
-            
-            // Call filterSelection or loadHistoryData based on the clicked button
-            if (this.id === 'history-btn') {
-                loadHistoryData();
-            } else {
-                const filter = this.getAttribute('onclick').match(/'([^']+)'/)[1];
-                filterSelection(filter);
-            }
         });
     });
-
-    // Also add event listener for the history button if not included in filterButtons
-    if (historyButton && !historyButton.classList.contains('filter-btn')) {
-        historyButton.addEventListener('click', function() {
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            loadHistoryData();
-        });
-    }
 }
 
 function filterSelection(filter) {
-	// Clear existing gallery
-    const gallery = document.querySelector('.gallery');
-    gallery.innerHTML = '';
-
-	createGallery(mergedData);
-
     const galleryItems = document.querySelectorAll('.gallery-item');
     galleryItems.forEach(item => {
         if (filter === 'all' || item.dataset.eyeColor === filter) {
